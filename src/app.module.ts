@@ -8,18 +8,21 @@ import { AssinaturasModule } from './modules/assinaturas.module';
 import { Assinatura } from './infra/assinatura/assinatura.typeorm';
 import { Aplicativo } from './infra/aplicativo/aplicativo.typeorm';
 import { Cliente } from './infra/cliente/cliente.typeorm';
+import { PagamentosModule } from './modules/pagamentos.module';
+import { Pagamento } from './infra/pagamento/pagamento.typeorm';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: '.db/sql',
-      entities: [Aplicativo, Cliente, Assinatura],
+      entities: [Aplicativo, Cliente, Assinatura, Pagamento],
       synchronize: true,
     }),
     AssinaturasModule,
     AplicativosModule,
     ClientesModule,
+    PagamentosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -32,6 +32,8 @@ export class AssinaturasService {
     app.dataInicio = new Date();
     app.dataFim = new Date();
     app.dataFim.setDate(app.dataFim.getDate() + 7);
+    app.aplicativo = aplicativo;
+    app.cliente = cliente;
 
     await this.assinaturaRepository.create(app);
     return app;
