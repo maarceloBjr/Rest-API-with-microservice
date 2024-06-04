@@ -1,12 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AplicativoModule } from './aplicativo/aplicativo.module';
-import { ClienteModule } from './cliente/cliente.module';
-import { AssinaturaModule } from './assinatura/assinatura.module';
+import { AplicativosModule } from './modules/aplicativos.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClientesModule } from './modules/clientes.module';
+import { AssinaturasModule } from './modules/assinaturas.module';
+import { Assinatura } from './infra/assinatura/assinatura.typeorm';
+import { Aplicativo } from './infra/aplicativo/aplicativo.typeorm';
+import { Cliente } from './infra/cliente/cliente.typeorm';
 
 @Module({
-  imports: [AplicativoModule, ClienteModule, AssinaturaModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: '.db/sql',
+      entities: [Aplicativo, Cliente, Assinatura],
+      synchronize: true,
+    }),
+    AssinaturasModule,
+    AplicativosModule,
+    ClientesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
