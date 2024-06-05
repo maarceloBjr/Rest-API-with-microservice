@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AplicativosModule } from './modules/aplicativos.module';
+import { AplicativosModule } from './infra/modules/aplicativos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClientesModule } from './modules/clientes.module';
-import { AssinaturasModule } from './modules/assinaturas.module';
+import { ClientesModule } from './infra/modules/clientes.module';
+import { AssinaturasModule } from './infra/modules/assinaturas.module';
 import { Assinatura } from './infra/assinatura/assinatura.typeorm';
 import { Aplicativo } from './infra/aplicativo/aplicativo.typeorm';
 import { Cliente } from './infra/cliente/cliente.typeorm';
-import { PagamentosModule } from './modules/pagamentos.module';
+import { PagamentosModule } from './infra/modules/pagamentos.module';
 import { Pagamento } from './infra/pagamento/pagamento.typeorm';
 
 @Module({

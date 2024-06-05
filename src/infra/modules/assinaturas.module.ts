@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AssinaturasService } from '../domain/services/assinaturas.service';
+import { AssinaturasService } from '../../domain/services/assinaturas.service';
 import { AssinaturasController } from 'src/gateway/controllers/assinaturas.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AssinaturaRepository } from 'src/infra/assinatura/assinaturas.repository';

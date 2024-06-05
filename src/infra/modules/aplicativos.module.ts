@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AplicativosService } from '../domain/services/aplicativos.service';
+import { AplicativosService } from '../../domain/services/aplicativos.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AplicativosController } from 'src/gateway/controllers/aplicativos.controller';
 import { AplicativoRepository } from 'src/infra/aplicativo/aplicativos.repository';
