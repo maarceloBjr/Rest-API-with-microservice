@@ -26,8 +26,6 @@ export class AssinaturasService {
     );
 
     const app = new Assinatura(createAssinaturaDto);
-    console.log(app);
-    
 
     app.dataInicio = new Date();
     app.dataFim = new Date();

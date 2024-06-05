@@ -1,4 +1,4 @@
-import { decimalTransformer } from 'src/util/transformers';
+import { decimalTransformer } from 'src/application/util/transformers';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
 

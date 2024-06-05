@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { decimalTransformer } from 'src/util/transformers';
+import { decimalTransformer } from 'src/application/util/transformers';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
 
 @Entity()

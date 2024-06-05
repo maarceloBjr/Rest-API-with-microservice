@@ -20,7 +20,11 @@ export class AssinaturaRepository implements IAssinaturaRepository {
   }
 
   async findAll(): Promise<Assinatura[]> {
-    return this.assinaturaRepository.find();
+    return this.assinaturaRepository
+      .createQueryBuilder('assinatura')
+      .leftJoinAndSelect('assinatura.cliente', 'cliente')
+      .leftJoinAndSelect('assinatura.aplicativo', 'aplicativo')
+      .getMany();
   }
 
   async findById(id: string): Promise<Assinatura> {

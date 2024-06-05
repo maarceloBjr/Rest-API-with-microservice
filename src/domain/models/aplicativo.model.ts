@@ -1,5 +1,3 @@
-import { Assinatura } from './assinatura.model';
-
 export class Aplicativo {
   id: string;
 
