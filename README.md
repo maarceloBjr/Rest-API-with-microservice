@@ -38,14 +38,8 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -74,3 +68,33 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## ENDPOINTS
+
+Lista com todos os clientes cadastrados
+GET localhost:3000/clientes
+
+Lista com todos os aplicativos cadastrados
+GET localhost:3000/aplicativos
+
+Cria uma assinatura
+POST localhost:3000/assinaturas
+
+Atualizar o custo mensal do aplicativo
+PATCH localhost:3000/aplicativos/atualizaCusto/:id
+
+Retorna a lista com todas as assinaturas confirme o tipo
+GET localhost:3000/assinaturas/tipo/{ativa, cancelada ou todas}
+
+Retorna a lista das assinaturas do cliente informado
+GET localhost:3000/assinaturas/cliente/:id
+
+Retorna a lista de assinaturas de um aplicativo
+GET localhost:3000/assinaturas/aplicativo/:id
+
+Solicita o registro de um pagamento
+(data deve ser AAAA/MM/DD)
+POST localhost:3000/pagamentos
+
+Retorna se a assinatura questionada permanece ativa
+GET localhost:3000/assinaturas/validaAssinatura/:id
