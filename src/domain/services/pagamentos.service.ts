@@ -14,23 +14,21 @@ export class PagamentosService {
     private assinaturaRepository: IAssinaturaRepository,
   ) {}
   async create(createPagamentoDto: CreatePagamentoDto) {
-
     const assinatura = await this.assinaturaRepository.findById(
       createPagamentoDto.assinaturaId,
     );
     const custoApp = assinatura.aplicativo.custoMensal;
-
-    if(custoApp > createPagamentoDto.valorPago){
-      throw new Error('Valor pago menor do que o custo do aplicativo');
-    }else if(custoApp < createPagamentoDto.valorPago){
-      const valorEstorno = createPagamentoDto.valorPago - custoApp;
-    }
+    let valorEstorno = createPagamentoDto.valorPago - custoApp;
 
     //fazer retornar o status baseado no valorEstorno
 
     const app = new Pagamento(createPagamentoDto);
-    await this.pagamentoRepository.create(app);
-    return app;
+    app.assinatura = assinatura;
+    return await this.pagamentoRepository.create(
+      app,
+      valorEstorno,
+      assinatura.id,
+    );
   }
 
   async findAll() {

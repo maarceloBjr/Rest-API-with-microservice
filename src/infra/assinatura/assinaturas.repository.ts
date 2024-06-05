@@ -20,6 +20,10 @@ export class AssinaturaRepository implements IAssinaturaRepository {
     await this.assinaturaRepository.update(assinatura.id, assinatura);
   }
 
+  async updateDataFim(id: string, novaDataFim: Date): Promise<void> {
+    await this.assinaturaRepository.update(id, { dataFim: novaDataFim });
+  }
+
   async findAll(): Promise<Assinatura[]> {
     return this.assinaturaRepository
       .createQueryBuilder('assinatura')
@@ -49,25 +53,40 @@ export class AssinaturaRepository implements IAssinaturaRepository {
       query.andWhere('assinatura.dataFim < :dataAtual', { dataAtual: new Date() });
     }
   
-    return query.getMany();
+    const assinaturas = await query.getMany();
+  
+    return assinaturas.map(assinatura => ({
+      ...assinatura,
+      status: assinatura.dataFim > new Date() ? SituacaoAssinatura.ATIVA : SituacaoAssinatura.CANCELADA
+    }));
   }
 
   async findByCliente(clienteId: string): Promise<Assinatura[]> {
-    return this.assinaturaRepository
+    const assinaturas = await this.assinaturaRepository
       .createQueryBuilder('assinatura')
       .leftJoinAndSelect('assinatura.cliente', 'cliente')
       .leftJoinAndSelect('assinatura.aplicativo', 'aplicativo')
       .where('assinatura.cliente.id = :clienteId', { clienteId })
       .getMany();
+  
+    return assinaturas.map(assinatura => ({
+      ...assinatura,
+      status: assinatura.dataFim > new Date() ? SituacaoAssinatura.ATIVA : SituacaoAssinatura.CANCELADA
+    }));
   }
 
   async findByAplicativo(aplicativoId: string): Promise<Assinatura[]> {
-    return this.assinaturaRepository
+    const assinaturas = await this.assinaturaRepository
       .createQueryBuilder('assinatura')
       .leftJoinAndSelect('assinatura.cliente', 'cliente')
       .leftJoinAndSelect('assinatura.aplicativo', 'aplicativo')
       .where('assinatura.aplicativo.id = :aplicativoId', { aplicativoId })
       .getMany();
+
+      return assinaturas.map(assinatura => ({
+        ...assinatura,
+        status: assinatura.dataFim > new Date() ? SituacaoAssinatura.ATIVA : SituacaoAssinatura.CANCELADA
+      }));
   }
 
   async delete(id: string): Promise<void> {

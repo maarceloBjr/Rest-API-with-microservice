@@ -19,7 +19,7 @@ export class Aplicativo {
   custoMensal: number;
 
   @OneToMany(() => Assinatura, (assinatura) => assinatura.aplicativo)
-  assinatura: Assinatura;
+  assinatura: Assinatura[];
   
   constructor(props: Partial<Aplicativo>) {
     Object.assign(this, props);

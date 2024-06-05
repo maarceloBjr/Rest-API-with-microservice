@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { decimalTransformer } from 'src/application/util/transformers';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
 
@@ -18,7 +18,7 @@ export class Pagamento {
   })
   valorPago: number;
 
-  @OneToMany(() => Assinatura, (assinatura) => assinatura.pagamento)
+  @ManyToOne(() => Assinatura, (assinatura) => assinatura.pagamento)
   @JoinColumn()
   assinatura: Assinatura;
 

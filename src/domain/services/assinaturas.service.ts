@@ -41,25 +41,20 @@ export class AssinaturasService {
   async validaAssinatura(id: string) {
     const assinatura = await this.assinaturaRepository.findById(id);
     if (assinatura.dataFim < new Date()) {
-      throw new Error('Assinatura expirada');
+      return false;
     }
-
-    //fazer retornar true ou false
-    return assinatura;
+    return true;
   }
 
   async findByTipo(tipo: SituacaoAssinatura) {
-    // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
     return this.assinaturaRepository.findByTipo(tipo);
   }
 
   async findByCliente(clienteId: string) {
-    // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
     return this.assinaturaRepository.findByCliente(clienteId);
   }
 
   async findByAplicativo(aplicativoId: string) {
-     // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
     return this.assinaturaRepository.findByAplicativo(aplicativoId);
   }
 

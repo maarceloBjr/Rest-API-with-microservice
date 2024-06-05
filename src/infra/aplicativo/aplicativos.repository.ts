@@ -15,8 +15,9 @@ export class AplicativoRepository implements IAplicativoRepository {
     await this.aplicativoRepository.save(aplicativo);
   }
 
-  async update(aplicativo: Aplicativo): Promise<void> {
+  async update(aplicativo: Aplicativo): Promise<Aplicativo> {
     await this.aplicativoRepository.update(aplicativo.id, aplicativo);
+    return aplicativo;
   }
 
   async findAll(): Promise<Aplicativo[]> {

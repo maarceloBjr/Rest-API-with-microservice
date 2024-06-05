@@ -13,7 +13,7 @@ export class Cliente {
   email: string;
 
   @OneToMany(() => Assinatura, (assinatura) => assinatura.cliente)
-  assinatura: Assinatura;
+  assinatura: Assinatura[];
 
   constructor(props: Partial<Cliente>) {
     Object.assign(this, props);
