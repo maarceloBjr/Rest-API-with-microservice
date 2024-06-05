@@ -1,5 +1,5 @@
 import { decimalTransformer } from 'src/application/util/transformers';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
 
 @Entity()
@@ -18,7 +18,7 @@ export class Aplicativo {
   })
   custoMensal: number;
 
-  @OneToOne(() => Assinatura, (assinatura) => assinatura.aplicativo)
+  @OneToMany(() => Assinatura, (assinatura) => assinatura.aplicativo)
   assinatura: Assinatura;
   
   constructor(props: Partial<Aplicativo>) {

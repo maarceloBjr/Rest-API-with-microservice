@@ -3,14 +3,31 @@ import { CreatePagamentoDto } from 'src/application/dtos/pagamento/create-pagame
 import { UpdatePagamentoDto } from 'src/application/dtos/pagamento/update-pagamento.dto';
 import { IPagamentoRepository } from '../repositories/IPagamentoRepository';
 import { Pagamento } from '../models/pagamento.model';
+import { IAssinaturaRepository } from '../repositories/IAssinaturaRepository';
 
 @Injectable()
 export class PagamentosService {
   constructor(
     @Inject('IPagamentoRepository')
     private pagamentoRepository: IPagamentoRepository,
+    @Inject('IAssinaturaRepository')
+    private assinaturaRepository: IAssinaturaRepository,
   ) {}
   async create(createPagamentoDto: CreatePagamentoDto) {
+
+    const assinatura = await this.assinaturaRepository.findById(
+      createPagamentoDto.assinaturaId,
+    );
+    const custoApp = assinatura.aplicativo.custoMensal;
+
+    if(custoApp > createPagamentoDto.valorPago){
+      throw new Error('Valor pago menor do que o custo do aplicativo');
+    }else if(custoApp < createPagamentoDto.valorPago){
+      const valorEstorno = createPagamentoDto.valorPago - custoApp;
+    }
+
+    //fazer retornar o status baseado no valorEstorno
+
     const app = new Pagamento(createPagamentoDto);
     await this.pagamentoRepository.create(app);
     return app;

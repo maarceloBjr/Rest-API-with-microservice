@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CreateAssinaturaDto } from '../../application/dtos/assinatura/create-assinatura.dto';
 import { UpdateAssinaturaDto } from '../../application/dtos/assinatura/update-assinatura.dto';
 import { AssinaturasService } from 'src/domain/services/assinaturas.service';
+import { SituacaoAssinatura } from 'src/application/util/situacaoAssinatura.enum';
 
 @Controller('assinaturas')
 export class AssinaturasController {
@@ -20,6 +21,26 @@ export class AssinaturasController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.assinaturasService.findOne(id);
+  }
+
+  @Get('tipo/:tipo')
+  findByTipo(@Param('tipo') tipo: SituacaoAssinatura) {
+    return this.assinaturasService.findByTipo(tipo);
+  }
+
+  @Get('cliente/:clienteId')
+  findByCliente(@Param('clienteId') clienteId: string) {
+    return this.assinaturasService.findByCliente(clienteId);
+  }
+
+  @Get('aplicativo/:aplicativoId')
+  findByAplicativo(@Param('aplicativoId') aplicativoId: string) {
+    return this.assinaturasService.findByAplicativo(aplicativoId);
+  }
+
+  @Get('validaAssinatura/:id')
+  validaAssinatura(@Param('id') id: string) {
+    return this.assinaturasService.validaAssinatura(id);
   }
 
   @Patch(':id')

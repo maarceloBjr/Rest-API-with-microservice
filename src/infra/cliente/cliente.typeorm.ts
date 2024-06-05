@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
 
 @Entity()
@@ -12,7 +12,7 @@ export class Cliente {
   @Column()
   email: string;
 
-  @OneToOne(() => Assinatura, (assinatura) => assinatura.cliente)
+  @OneToMany(() => Assinatura, (assinatura) => assinatura.cliente)
   assinatura: Assinatura;
 
   constructor(props: Partial<Cliente>) {

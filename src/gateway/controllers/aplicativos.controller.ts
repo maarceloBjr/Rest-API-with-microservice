@@ -22,9 +22,9 @@ export class AplicativosController {
     return this.aplicativosService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch('atualizaCusto/:id')
   update(@Param('id') id: string, @Body() updateAplicativoDto: UpdateAplicativoDto) {
-    return this.aplicativosService.update(id, updateAplicativoDto);
+    return this.aplicativosService.updateCusto(id, updateAplicativoDto);
   }
 
   @Delete(':id')

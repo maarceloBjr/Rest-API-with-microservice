@@ -12,16 +12,23 @@ import { Aplicativo } from 'src/infra/aplicativo/aplicativo.typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([Assinatura, Cliente, Aplicativo])],
   controllers: [AssinaturasController],
-  providers: [AssinaturasService, AssinaturaRepository, ClienteRepository, AplicativoRepository, {
-    provide: 'IAssinaturaRepository',
-    useExisting: AssinaturaRepository,
-  }, {
-    provide: 'IClienteRepository',
-    useExisting: ClienteRepository,
-  },
-  {
-    provide: 'IAplicativoRepository',
-    useExisting: AplicativoRepository,
-  }],
+  providers: [
+    AssinaturasService,
+    AssinaturaRepository,
+    ClienteRepository,
+    AplicativoRepository,
+    {
+      provide: 'IAssinaturaRepository',
+      useExisting: AssinaturaRepository,
+    },
+    {
+      provide: 'IClienteRepository',
+      useExisting: ClienteRepository,
+    },
+    {
+      provide: 'IAplicativoRepository',
+      useExisting: AplicativoRepository,
+    },
+  ],
 })
 export class AssinaturasModule {}

@@ -25,11 +25,13 @@ export class AplicativosService {
     return this.aplicativoRepository.findById(id);
   }
 
-  async update(id: string, updateAplicativoDto: UpdateAplicativoDto) {
+  async updateCusto(id: string, updateAplicativoDto: UpdateAplicativoDto) {
     const app = await this.aplicativoRepository.findById(id);
 
-    updateAplicativoDto.nome && (app.nome = updateAplicativoDto.nome);
     updateAplicativoDto.custoMensal && (app.custoMensal = updateAplicativoDto.custoMensal);
+    if(!updateAplicativoDto.custoMensal){
+      throw new Error('Custo mensal não informado');
+    }
 
     return this.aplicativoRepository.update(app);
   }

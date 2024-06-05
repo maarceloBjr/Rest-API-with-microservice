@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Cliente } from '../cliente/cliente.typeorm';
 import { Aplicativo } from '../aplicativo/aplicativo.typeorm';
 import { Pagamento } from '../pagamento/pagamento.typeorm';
@@ -14,15 +14,15 @@ export class Assinatura {
   @Column()
   dataFim: Date;
 
-  @OneToOne(() => Cliente, (cliente) => cliente.assinatura)
+  @ManyToOne(() => Cliente, (cliente) => cliente.assinatura)
   @JoinColumn()
   cliente: Cliente;
 
-  @OneToOne(() => Aplicativo, (aplicativo) => aplicativo.assinatura)
+  @ManyToOne(() => Aplicativo, (aplicativo) => aplicativo.assinatura)
   @JoinColumn()
   aplicativo: Aplicativo;
 
-  @OneToOne(() => Pagamento, (pagamento) => pagamento.assinatura)
+  @ManyToOne(() => Pagamento, (pagamento) => pagamento.assinatura)
   pagamento: Pagamento;
 
   constructor(props: Partial<Assinatura>) {

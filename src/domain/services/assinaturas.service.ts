@@ -5,6 +5,7 @@ import { Assinatura } from 'src/domain/models/assinatura.model';
 import { IAssinaturaRepository } from 'src/domain/repositories/IAssinaturaRepository';
 import { IClienteRepository } from '../repositories/IClienteRepository';
 import { IAplicativoRepository } from '../repositories/IAplicativoRepository';
+import { SituacaoAssinatura } from 'src/application/util/situacaoAssinatura.enum';
 
 @Injectable()
 export class AssinaturasService {
@@ -35,6 +36,31 @@ export class AssinaturasService {
 
     await this.assinaturaRepository.create(app);
     return app;
+  }
+
+  async validaAssinatura(id: string) {
+    const assinatura = await this.assinaturaRepository.findById(id);
+    if (assinatura.dataFim < new Date()) {
+      throw new Error('Assinatura expirada');
+    }
+
+    //fazer retornar true ou false
+    return assinatura;
+  }
+
+  async findByTipo(tipo: SituacaoAssinatura) {
+    // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
+    return this.assinaturaRepository.findByTipo(tipo);
+  }
+
+  async findByCliente(clienteId: string) {
+    // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
+    return this.assinaturaRepository.findByCliente(clienteId);
+  }
+
+  async findByAplicativo(aplicativoId: string) {
+     // fazer retornar o status da assinatura junto: ATIVA ou CANCELADA
+    return this.assinaturaRepository.findByAplicativo(aplicativoId);
   }
 
   async findAll() {
