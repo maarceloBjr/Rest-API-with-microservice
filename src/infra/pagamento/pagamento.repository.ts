@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pagamento } from './pagamento.typeorm';
-import { IPagamentoRepository } from 'src/domain/repositories/IPagamentoRepository';
+import { IPagamentoRepository } from 'src/domain/interfaces/IPagamentoRepository';
 
 @Injectable()
 export class PagamentoRepository implements IPagamentoRepository {

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateClienteDto } from '../../application/dtos/cliente/create-cliente.dto';
 import { UpdateClienteDto } from '../../application/dtos/cliente/update-cliente.dto';
 import { Cliente } from 'src/domain/models/cliente.model';
-import { IClienteRepository } from 'src/domain/repositories/IClienteRepository';
+import { IClienteRepository } from 'src/domain/interfaces/IClienteRepository';
 
 @Injectable()
 export class ClientesService {

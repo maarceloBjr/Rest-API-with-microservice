@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateAplicativoDto } from '../../application/dtos/aplicativo/create-aplicativo.dto';
 import { UpdateAplicativoDto } from '../../application/dtos/aplicativo/update-aplicativo.dto';
 import { Aplicativo } from 'src/domain/models/aplicativo.model';
-import { IAplicativoRepository } from 'src/domain/repositories/IAplicativoRepository';
+import { IAplicativoRepository } from 'src/domain/interfaces/IAplicativoRepository';
 
 @Injectable()
 export class AplicativosService {

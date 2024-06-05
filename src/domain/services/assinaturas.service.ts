@@ -2,10 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateAssinaturaDto } from '../../application/dtos/assinatura/create-assinatura.dto';
 import { UpdateAssinaturaDto } from '../../application/dtos/assinatura/update-assinatura.dto';
 import { Assinatura } from 'src/domain/models/assinatura.model';
-import { IAssinaturaRepository } from 'src/domain/repositories/IAssinaturaRepository';
-import { IClienteRepository } from '../repositories/IClienteRepository';
-import { IAplicativoRepository } from '../repositories/IAplicativoRepository';
+import { IClienteRepository } from '../interfaces/IClienteRepository';
+import { IAplicativoRepository } from '../interfaces/IAplicativoRepository';
 import { SituacaoAssinatura } from 'src/application/util/situacaoAssinatura.enum';
+import { IAssinaturaRepository } from '../interfaces/IAssinaturaRepository';
 
 @Injectable()
 export class AssinaturasService {

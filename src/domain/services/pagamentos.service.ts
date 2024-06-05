@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreatePagamentoDto } from 'src/application/dtos/pagamento/create-pagamento.dto';
 import { UpdatePagamentoDto } from 'src/application/dtos/pagamento/update-pagamento.dto';
-import { IPagamentoRepository } from '../repositories/IPagamentoRepository';
+import { IPagamentoRepository } from '../interfaces/IPagamentoRepository';
 import { Pagamento } from '../models/pagamento.model';
-import { IAssinaturaRepository } from '../repositories/IAssinaturaRepository';
+import { IAssinaturaRepository } from '../interfaces/IAssinaturaRepository';
 
 @Injectable()
 export class PagamentosService {

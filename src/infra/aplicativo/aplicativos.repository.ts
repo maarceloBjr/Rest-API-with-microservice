@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IAplicativoRepository } from 'src/domain/repositories/IAplicativoRepository';
+import { IAplicativoRepository } from 'src/domain/interfaces/IAplicativoRepository';
 import { Aplicativo } from './aplicativo.typeorm';
 
 @Injectable()

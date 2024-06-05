@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IAssinaturaRepository } from 'src/domain/repositories/IAssinaturaRepository';
 import { Assinatura } from './assinatura.typeorm';
 import { SituacaoAssinatura } from 'src/application/util/situacaoAssinatura.enum';
+import { IAssinaturaRepository } from 'src/domain/interfaces/IAssinaturaRepository';
 
 @Injectable()
 export class AssinaturaRepository implements IAssinaturaRepository {
