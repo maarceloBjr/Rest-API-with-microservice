@@ -1,0 +1,8 @@
+{
+    auto_https off
+}
+
+:80 {
+  reverse_proxy /api/* nest:3000
+  reverse_proxy /cache/* asscache:3001
+}

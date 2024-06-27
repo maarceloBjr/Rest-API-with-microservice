@@ -1,0 +1,57 @@
+version: '3.8'
+
+networks:
+  naruto:
+    driver: bridge
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - naruto
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - naruto
+
+  nestjs-app:
+    build: ./api
+    container_name: nestjs-app
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - naruto
+    links:
+      - rabbitmq
+      - redis
+
+  asscache: 
+    build: ./cache
+    container_name: asscache
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - naruto
+    links:
+      - rabbitmq
+      - redis
+      - nestjs-app
