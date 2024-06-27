@@ -17,11 +17,8 @@ const app = new Elysia()
       let data
 
       try {
-        console.log('fetching data')
-
         const response = await fetch(`http://nestjs-app:3000/assinaturas/validaAssinatura/${id}`)
         data = await response.json()
-        console.log(data)
       } catch (error) {
         console.error(error)
         return { data: 'Fetch Error' }
