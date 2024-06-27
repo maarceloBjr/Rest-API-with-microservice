@@ -47,14 +47,25 @@ console.log('Waiting for messages in ', sla.queue)
 channel.consume(queue, msg => {
   if (msg) {
     console.log('Received:', msg.content.toString())
-    const { id, value } = JSON.parse(msg.content.toString())
-    if (value === 'flush') {
-      console.log('Flushing Cache')
-      client.flushAll()
-      channel.ack(msg)
-    } else {
-      client.set(id, value)
-      channel.ack(msg)
+    const message = JSON.parse(msg.content.toString()) as {
+      event: string
+      data: { id: string; value: string }
+    }
+
+    switch (message?.event) {
+      case 'flush_cache':
+        console.log('Flushing Cache')
+        client.flushAll()
+        channel.ack(msg)
+        break
+      case 'update_cache':
+        const { id, value } = message.data
+        client.set(id, value)
+        channel.ack(msg)
+        break
+      default:
+        console.log('Unknown Event:', message.event)
+        channel.ack(msg)
     }
   }
 })
