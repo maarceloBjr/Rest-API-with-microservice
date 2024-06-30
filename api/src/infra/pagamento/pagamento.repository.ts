@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Pagamento } from './pagamento.typeorm';
 import { IPagamentoRepository } from 'src/domain/interfaces/IPagamentoRepository';
 import { Assinatura } from '../assinatura/assinatura.typeorm';
+import { CacheService } from 'src/domain/services/queue.service';
 
 @Injectable()
 export class PagamentoRepository implements IPagamentoRepository {
@@ -12,6 +13,7 @@ export class PagamentoRepository implements IPagamentoRepository {
     private pagamentoRepository: Repository<Pagamento>,
     @InjectRepository(Assinatura)
     private assinaturaRepository: Repository<Assinatura>,
+    private cacheService: CacheService,
   ) {}
 
   async create(
@@ -41,6 +43,11 @@ export class PagamentoRepository implements IPagamentoRepository {
 
       // Salvar a assinatura atualizada
       await this.assinaturaRepository.save(assinatura);
+
+      this.cacheService.sendToCache({
+        id: assinatura.id,
+        value: "true",
+      });
 
       pagamentoCreate = await this.pagamentoRepository.save(pagamento);
       return {

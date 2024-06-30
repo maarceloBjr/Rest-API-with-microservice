@@ -10,9 +10,24 @@ import { Aplicativo } from './infra/aplicativo/aplicativo.typeorm';
 import { Cliente } from './infra/cliente/cliente.typeorm';
 import { PagamentosModule } from './infra/modules/pagamentos.module';
 import { Pagamento } from './infra/pagamento/pagamento.typeorm';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { CacheService } from './domain/services/queue.service';
 
 @Module({
   imports: [
+    ClientsModule.register([
+      {
+        name: 'CACHE_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://rabbitmq:5672'],
+          queue: 'update_cache',
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
+    ]),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: '.db/sql',
@@ -25,6 +40,6 @@ import { Pagamento } from './infra/pagamento/pagamento.typeorm';
     PagamentosModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CacheService],
 })
 export class AppModule {}
