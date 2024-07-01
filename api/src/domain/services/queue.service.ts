@@ -18,7 +18,7 @@ export class CacheService implements OnModuleInit {
   }
 
   connect() {
-    this.connection = amqp.connect(['amqp://guest:guest@rabbitmq:5672'], {
+    this.connection = amqp.connect(['amqp://rabbitmq:5672'], {
       reconnectTimeInSeconds: 10,
     });
 
@@ -32,9 +32,11 @@ export class CacheService implements OnModuleInit {
     id: string; value: string;
   }) {
     console.log('Sending to cache', data);
-    const teste = await this.client.emit('update_cache', data);
-
-    console.log('teste', teste);
+    try{
     return this.client.emit('update_cache', data);
+  
+    } catch (err) {
+      console.error('Failed to send to RabbitMQ', err);
+    }
   }
 }
