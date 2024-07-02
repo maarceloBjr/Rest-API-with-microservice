@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/pagamentos/
+content-type: application/json
+
+{
+  "assinaturaId": "2",
+  "dataPagamento": "2024/07/01",
+  "valorPago": 50.99
+}
